@@ -1,8 +1,10 @@
 from django.urls import reverse
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
 from rest_framework_simplejwt.tokens import RefreshToken
-from ..models import User, Wallet, Transaction
+
+from ..models import User, Transaction
+
 
 class WithdrawTests(APITestCase):
     def setUp(self):
@@ -42,9 +44,8 @@ class WithdrawTests(APITestCase):
 
         self.assertEqual(self.wallet.balance, 500.00)
 
-        transaction = Transaction.objects.first()
+        transaction = Transaction.objects.filter(transaction_type='WITHDRAW').first()
         self.assertEqual(transaction.amount, 500.00)
-        self.assertEqual(transaction.transaction_type, 'WITHDRAW')
         self.assertEqual(transaction.status, 'SUCCESS')
 
     def test_withdraw_insufficient_balance(self):

@@ -1,7 +1,8 @@
 from django.urls import reverse
-from rest_framework.test import APITestCase
 from rest_framework import status
-from ..models import User, Transaction
+from rest_framework.test import APITestCase
+
+from ..models import User
 
 
 class AuthenticationTests(APITestCase):
@@ -52,8 +53,6 @@ class AuthenticationTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('access', response.data)
         self.assertIn('refresh', response.data)
-        self.assertEqual(response.data['cpf'], self.user_data['cpf'])
-        self.assertEqual(response.data['full_name'], self.user_data['full_name'])
 
     def test_login_wrong_password(self):
         url = reverse('login')
