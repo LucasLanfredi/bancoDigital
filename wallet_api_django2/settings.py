@@ -63,28 +63,28 @@ TEMPLATES = [
 WSGI_APPLICATION = 'wallet_api_django2.wsgi.application'
 
 # DOCKER
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ.get('POSTGRES_DB', 'wallet_db'),
-#         'USER': os.environ.get('POSTGRES_USER', 'wallet_user'),
-#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'wallet_pass'),
-#         'HOST': os.environ.get('POSTGRES_HOST', 'db'),
-#         'PORT': os.environ.get('POSTGRES_PORT', '5432'),
-#     }
-# }
-
-# LOCAL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB', 'postgres'),
-        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'Mnb48625'),
-        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
-        'PORT': os.environ.get('POSTGRES_PORT', '5433'),
+        'NAME': os.environ.get('POSTGRES_DB', 'wallet_db'),
+        'USER': os.environ.get('POSTGRES_USER', 'wallet_user'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'wallet_pass'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'db'),
+        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
     }
 }
+
+# LOCAL
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('POSTGRES_DB', 'postgres'),
+#         'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'Mnb48625'),
+#         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+#         'PORT': os.environ.get('POSTGRES_PORT', '5433'),
+#     }
+# }
 
 AUTH_USER_MODEL = 'wallet_api_django2.user'
 

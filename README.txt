@@ -18,6 +18,7 @@ Uma API para gerenciar transações financeiras, incluindo autenticação de usu
 3. docker-compose up --build -d
 4. docker-compose exec web python manage.py makemigrations
 5. docker-compose exec web python manage.py migrate
+6. Popule o banco: docker-compose exec web python manage.py populate_db
 
 Realizar testes Docker:
 docker-compose run --rm web python manage.py test wallet_api_django2.tests.withdraw_test
