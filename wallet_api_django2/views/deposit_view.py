@@ -3,7 +3,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.db import transaction
-from ..models import Wallet, Transaction
+from ..models import Transaction
 from ..serializers import DepositSerializer
 
 class DepositView(generics.CreateAPIView):

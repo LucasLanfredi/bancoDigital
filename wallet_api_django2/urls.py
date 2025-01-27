@@ -1,4 +1,5 @@
 from django.urls import path
+
 from .views import (
     RegisterView,
     LoginView,
@@ -16,8 +17,8 @@ urlpatterns = [
     path('api/wallets/balance/', BalanceView.as_view(), name='balance'),
     path('api/wallets/deposit/', DepositView.as_view(), name='deposit'),
 
-    path('api/transactions/', TransferView.as_view(), name='transfer'),
-    path('api/transactions/history/', TransactionListView.as_view(), name='transactions'),
+    path('transfer/', TransferView.as_view(), name='transfer'),
+    path('transactions/', TransactionListView.as_view(), name='transaction-list'),
     path('deposit/', DepositView.as_view(), name='deposit'),
     path('withdraw/', WithdrawView.as_view(), name='withdraw'),
 ]

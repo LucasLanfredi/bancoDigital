@@ -1,46 +1,35 @@
 from django.db import models
-from .user import User
+from django.utils import timezone
 
 class Transaction(models.Model):
-    class TransactionType(models.TextChoices):
-        DEPOSIT = 'DEPOSIT', 'Depósito'
-        TRANSFER = 'TRANSFER', 'Transferência'
-
-    class StatusType(models.TextChoices):
-        SUCCESS = 'SUCCESS', 'Sucesso'
-        FAILED = 'FAILED', 'Falha'
+    TRANSACTION_TYPES = (
+        ('DEPOSIT', 'Depósito'),
+        ('WITHDRAW', 'Saque'),
+        ('TRANSFER', 'Transferência'),
+    )
+    STATUS_CHOICES = (
+        ('SUCCESS', 'Sucesso'),
+        ('FAILED', 'Falha'),
+    )
 
     sender = models.ForeignKey(
-        User,
+        'User',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
         related_name='sent_transactions'
     )
     receiver = models.ForeignKey(
-        User,
+        'User',
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
         related_name='received_transactions'
     )
-    amount = models.DecimalField(
-        max_digits=15,
-        decimal_places=2
-    )
-    transaction_type = models.CharField(
-        max_length=20,
-        choices=TransactionType.choices
-    )
-    status = models.CharField(
-        max_length=20,
-        choices=StatusType.choices
-    )
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name = 'Transação'
-        verbose_name_plural = 'Transações'
-        ordering = ['-timestamp']
+    amount = models.DecimalField(max_digits=15, decimal_places=2)
+    transaction_type = models.CharField(max_length=10, choices=TRANSACTION_TYPES)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
+    timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f'{self.get_transaction_type_display()} - {self.amount}'
+        return f"{self.transaction_type} - {self.amount}"

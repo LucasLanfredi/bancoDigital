@@ -1,29 +1,18 @@
-from decimal import Decimal
-
 from rest_framework import serializers
-from ..models import Transaction
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+from wallet_api_django2.models import Transaction
+
 
 class TransactionSerializer(serializers.ModelSerializer):
+    sender = serializers.SerializerMethodField()
+    receiver = serializers.SerializerMethodField()
+
     class Meta:
         model = Transaction
-        fields = (
-            'id',
-            'sender_cpf',
-            'receiver_cpf',
-            'amount',
-            'transaction_type',
-            'status',
-            'timestamp'
-        )
-        read_only_fields = ('status', 'timestamp')
+        fields = ['id', 'sender', 'receiver', 'amount', 'transaction_type', 'status', 'timestamp']
 
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        data = super().validate(attrs)
-        data['cpf'] = self.user.cpf
-        data['full_name'] = self.user.full_name
-        return data
+    def get_sender(self, obj):
+        return obj.sender.full_name if obj.sender else None
 
-class DepositSerializer(serializers.Serializer):
-    amount = serializers.DecimalField(max_digits=15, decimal_places=2, min_value=Decimal(0.01))
+    def get_receiver(self, obj):
+        return obj.receiver.full_name if obj.receiver else None
