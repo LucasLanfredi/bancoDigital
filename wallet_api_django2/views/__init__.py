@@ -1,6 +1,6 @@
-from .auth_views import RegisterView, LoginView
-from .wallet_views import BalanceView, DepositView, WithdrawView
-from .transaction_views import TransferView, TransactionListView
+from .auth_view import RegisterView, LoginView
+from .transfer_view import TransferView, TransactionListView
+from .wallet_view import BalanceView, DepositView, WithdrawView
 
 __all__ = [
     'RegisterView',

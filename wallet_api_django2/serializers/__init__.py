@@ -1,7 +1,9 @@
+from .deposit import DepositSerializer
+from .transaction import TransactionSerializer
 from .user import UserSerializer
 from .wallet import WalletSerializer
-from .transaction import TransactionSerializer, CustomTokenObtainPairSerializer, DepositSerializer
 from .withdraw import WithdrawSerializer
+from ..models.authentication import CustomTokenObtainPairSerializer
 
 __all__ = [
     'UserSerializer',
